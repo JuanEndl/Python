@@ -65,13 +65,13 @@ while True:
         productos.append(producto)
 
         print(f"Producto {producto[0]} agredado correctamente.\n")
-
+    
     # todavia nada
     elif opcion == 2:
-        print()
-    # todavia nada
+        print() # Modificacion de Productos
+
     elif opcion == 3:
-        print()
+        print() # Eliminar  Productos
 
     # muestra el listado y valida si hay algo o no
     elif opcion == 4:
@@ -88,7 +88,7 @@ while True:
                     comentario = "Stock Bajo" 
                 print(f"{elemento[0].ljust(30)}{str(elemento[1]).ljust(15)}{str(elemento[2]).ljust(10)}{comentario.rjust(20)}")
     else:
-    # Mostramos el nro de la opción seleccionada
+    # Mostramos el numero de la opción seleccionada
         print(f"Has seleccionado: , {opcion}")
 
 print("Salio del Programa")
