@@ -19,9 +19,9 @@ while True:
     print("4. Lista completa de Productos")
     print("0. Salir")
     print("*"*60)
-    # Solicitar al usuario que seleccione una opción
     #**************************************************************************
 
+    # Solicitar al usuario que seleccione una opción
     # valida si el usuario coloca un numero o una letra
     while True:
         try:
@@ -47,7 +47,7 @@ while True:
                 cantidad = int(input("Ingresar cantidad: "))
                 break
             except ValueError:
-                print("Por Favor, Ingresar un numero correcto")
+                print("Por Favor, Ingresar un valor correcto")
             
 
         # Validad precio
@@ -56,7 +56,7 @@ while True:
                 precio = float(input("Ingresar precio: "))
                 break
             except ValueError:
-                print("Por Favor, ingresar un valir correcto")
+                print("Por Favor, ingresar un valor correcto")
             
                 
 
@@ -70,6 +70,7 @@ while True:
     elif opcion == 2:
         print() # Modificacion de Productos
 
+    # todavia nada
     elif opcion == 3:
         print() # Eliminar  Productos
 
@@ -81,12 +82,12 @@ while True:
 
         # si encuentra algo trae el producto y ademas valida si tiene el stock bajo o no
         else:
-            print("nombre".ljust(30) + "cantidad".ljust(15) + "precio".ljust(10) + "comentario".just(20)) # -> acomoda los titulos
+            print("nombre".ljust(30) + "cantidad".ljust(15) + "precio".ljust(10) + "comentario".just(20)) # ---> acomoda los titulos
             for elemento in productos:
                 comentario = ""
                 if elemento[1] < 5: #-> revisa si tiene bajo el stock
                     comentario = "Stock Bajo" 
-                print(f"{elemento[0].ljust(30)}{str(elemento[1]).ljust(15)}{str(elemento[2]).ljust(10)}{comentario.rjust(20)}")
+                print(f"{elemento[0].ljust(30)}{str(elemento[1]).ljust(15)}{str(elemento[2]).ljust(10)}{comentario.rjust(20)}") #---> muestra la lista
     else:
     # Mostramos el numero de la opción seleccionada
         print(f"Has seleccionado: , {opcion}")
