@@ -17,7 +17,7 @@ while True:
     print("2. Modificacion")
     print("3. Eliminar Productos")
     print("4. Lista completa de Productos")
-    print("0. Salir")
+    print("0. Salir\n")
     print("*"*60)
     #**************************************************************************
 
@@ -69,25 +69,24 @@ while True:
     # todavia nada
     elif opcion == 2:
         print() # Modificacion de Productos
-
     # todavia nada
     elif opcion == 3:
         print() # Eliminar  Productos
 
     # muestra el listado y valida si hay algo o no
     elif opcion == 4:
-        print("Listado")
+        print("Listado\n")
         if len(productos) == 0:
             print("no hay nada")
 
         # si encuentra algo trae el producto y ademas valida si tiene el stock bajo o no
         else:
-            print("nombre".ljust(30) + "cantidad".ljust(15) + "precio".ljust(10) + "comentario".just(20)) # ---> acomoda los titulos
+            print("nombre".ljust(30) + "cantidad".ljust(15) + "precio".ljust(10) + "comentario".rjust(20)) #----> acomoda los titulos
             for elemento in productos:
                 comentario = ""
                 if elemento[1] < 5: #-> revisa si tiene bajo el stock
                     comentario = "Stock Bajo" 
-                print(f"{elemento[0].ljust(30)}{str(elemento[1]).ljust(15)}{str(elemento[2]).ljust(10)}{comentario.rjust(20)}") #---> muestra la lista
+                print(f"{elemento[0].ljust(30)}{str(elemento[1]).ljust(15)}{str(elemento[2]).ljust(10)}{comentario.rjust(20)}") #----> muestra la lista de productos
     else:
     # Mostramos el numero de la opción seleccionada
         print(f"Has seleccionado: , {opcion}")
