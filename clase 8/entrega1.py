@@ -30,7 +30,7 @@ while True:
             opcion = int(input(f"{color.LIGHT_BLUE}Por favor, selecciona una opción (0-4): {color.RESET} "))
             break
         except ValueError:
-            print(f"{color.RED}Por favor, ingresa un Nombre válido.{color.RESET}")
+            print(f"{color.RED}Por favor, ingresa un valor correcto.{color.RESET}")
             continue
     
     # cierra el programa
@@ -47,10 +47,10 @@ while True:
         # valida si es un string o no
         while True:    
                 nombre = input("\nIngresar nombre: ")
-                if nombre.isalpha():
+                if nombre.isalpha(): #----> metodo "isalpha" devuelve True si todos los caracteres son alfabéticos, False de lo contrario
                     break
                 else:
-                    print(f"{color.RED}Por Favor, Ingresar un valor correcto {color.RESET}")
+                    print(f"{color.RED}Por Favor, Ingresar un nombre correcto {color.RESET}")
 
         # Validad cantidad
         while True:
@@ -70,7 +70,7 @@ while True:
             
         # crear un producto y añadirlo a la Lista
         producto = [nombre,cantidad,precio]
-        productos.append(producto)
+        productos.append(producto) #---> el metodo "append" añade un elemento al final de la lista.
 
         print(f"\n{color.GREEN}Producto {producto[0]} agredado correctamente.\n {color.RESET}")
     
@@ -103,4 +103,5 @@ while True:
     # Mostramos el numero de la opción seleccionada
         print(f"{color.RED}Has seleccionado: '{opcion}', elije una opcion correcta en el rango del 0 al 4{color.RESET}")
 
+# termina el programa
 print(f"{color.LIGHT_CYAN}Termino el programa{color.RESET}")
