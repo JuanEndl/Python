@@ -94,7 +94,7 @@ while True:
                 f"{color.LIGHT_PURPLE}precio{color.RESET}".ljust(25) +
                 f"{color.LIGHT_PURPLE}comentario{color.RESET}"
                 ) #----> el titulo del ticket acomodado
-            for elemento in productos:
+            for elemento in productos: # se utiliza el bucle for
                 comentario = ""
                 if elemento[1] < 5: #-> revisa si tiene bajo el stock
                     comentario = "Stock Bajo" 
