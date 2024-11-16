@@ -130,18 +130,33 @@ def opcioniUno():
 def opcioniDos():
     global productos
     if opcion == 2:
-        idProducto = int(input("\nIngresa el id del producto a modificar: "))
+        while True:
+            try:
+                idProducto = int(input("\nIngresa el id del producto a modificar: "))
+                break
+            except ValueError:
+                print(f"{color.RED}ingresa un nuemero{color.RESET}")
+
+        idEncontrado = False # --->  Variable para verificar si se encontró el producto   "Bandera" (siempre se utiliza con un false)
 
         for  elemento in productos: # ---> recorre cada elemento de lista, cada elemento es un diccionario dentro de productos
 
             if idProducto == elemento["id"]: # ---> da el acceso al id de los productos
-                
+
                 # muestra el precio viejo y si se comple la condicion se modifica el precio 
                 nuevoPrecio = float(input(f"\nPrecio Actual: {color.RED}{elemento['precio']}{color.RESET} ingresa el nuevo precio: ")) # --> se ingresa el precio
 
                 elemento["precio"] = nuevoPrecio # --> se modifica el precio y se guarda en la variable nuevoPrecio
 
                 print(f"\n{color.GREEN}Precio actualizado a: {nuevoPrecio}{color.RESET}") # --> se imprime en la pantalla la variable nueva con el precio
+
+                # Si el producto fue encontrado sale 
+                idEncontrado = True  # "Bandera" 
+                break
+        
+        # Si no se encontró el producto, muestra un mensaje
+        if not idEncontrado:
+            print(f"{color.LIGHT_RED}ID no encontrado. Si no te acuerdas del ID, presiona 4 para ver la lista de productos.{color.RESET}")
 
    
 # Funcion opcion 4
