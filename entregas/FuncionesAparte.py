@@ -135,22 +135,14 @@ def opcioniDos():
         for  elemento in productos: # ---> recorre cada elemento de lista, cada elemento es un diccionario dentro de productos
 
             if idProducto == elemento["id"]: # ---> da el acceso al id de los productos
+                
+                # muestra el precio viejo y si se comple la condicion se modifica el precio 
+                nuevoPrecio = float(input(f"\nPrecio Actual: {color.RED}{elemento['precio']}{color.RESET} ingresa el nuevo precio: ")) # --> se ingresa el precio
 
-                while True: # ---> valida si el id es ingresado correctamente 
-                    try:
-                        # muestra el precio viejo y si se comple la condicion se modifica el precio 
-                        nuevoPrecio = float(input(f"\nPrecio Actual: {color.RED}{elemento['precio']}{color.RESET} ingresa el nuevo precio: ")) # --> se ingresa el precio
+                elemento["precio"] = nuevoPrecio # --> se modifica el precio y se guarda en la variable nuevoPrecio
 
-                        elemento["precio"] = nuevoPrecio # --> se modifica el precio y se guarda en la variable nuevoPrecio
-                        print(f"\n{color.GREEN}Precio actualizado a: {nuevoPrecio}{color.RESET}") # --> se imprime en la pantalla la variable nueva con el precio
-                        break
+                print(f"\n{color.GREEN}Precio actualizado a: {nuevoPrecio}{color.RESET}") # --> se imprime en la pantalla la variable nueva con el precio
 
-                    except ValueError:
-                        print(f"{color.RED}Por Favor, Ingresar un valor correcto {color.RESET}")
-                    
-
-                    # muestra este mensaje si el producto no se encontro
-                    print(f"{color.RED}El Producto no se encuentra, colocar la opcion 4 para ver los id de los productos{color.RESET}")
    
 # Funcion opcion 4
 def opcioniCuatro():
