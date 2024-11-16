@@ -29,9 +29,10 @@ while True:
     elif opcion == 1:
         FuncionesAparte.opcioniUno()
     
-    # todavia nada
+    # Modificacion del producto
     elif opcion == 2:
-        print(f"\n{color.RED}Todavia no hace nada{color.RESET}") # Modificacion de Productos
+        FuncionesAparte.opcioniDos()
+    
     # todavia nada
     elif opcion == 3:
         print(f"\n{color.RED}Todavia no hace nada{color.RESET}") # Eliminar  Productos

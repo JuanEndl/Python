@@ -1,4 +1,4 @@
-# importar el color a la funciones
+# importar el color a la Funciones
 import color
 
 # productos = [] # --> se comento para usar los "productos" pre definidos por mio descomentar para agregar todos los productos desde 0
@@ -7,33 +7,36 @@ import color
 # productos pre definidos por mi
 productos = [
     {
+        "id": 1,
         "nombre":"uva",
         "cantidad":12,
         "precio":12.4
     },
     {
+        "id": 2,
         "nombre":"papa",
         "cantidad":24,
         "precio":16.6
     },
     {
+        "id": 3,
         "nombre":"batata",
         "cantidad":5,
         "precio":17
     },
     {
+        "id": 4,
         "nombre":"sandia",
         "cantidad":2,
         "precio":3
     },
 ]
 
-
-# funcion asteriscos que separan  el menu
+# Funcion asteriscos que separan  el menu
 def asterisco():
     print(f"{color.LIGHT_GREEN}{'*' * 60}{color.RESET}")
 
-# funcion Muestra el menu
+# Funcion Muestra el menu
 def menu():
     print("Menú de Gestión de Productos\n")
     print("1. Ingresar nuevos Productos")
@@ -42,9 +45,7 @@ def menu():
     print("4. Lista completa de Productos")
     print("0. Salir\n")
 
-
-
-# funcion que elije del 0 al 4, Solicitar al usuario que seleccione una opción y valida si el usuario coloca un numero o una letra
+# Funcion que elije del 0 al 4, Solicitar al usuario que seleccione una opción y valida si el usuario coloca un numero o una letra
 def opcioninicial():
     while True:
         global opcion # ---> se declara variable global para usar fuera del la funcion
@@ -72,18 +73,24 @@ def opcioninicial():
 
         # si no es un numero nos dice el error
         except ValueError:
-            print(f"{color.RED}No se Permiten letras elije una opcion correcta del 0 al 4{color.RESET}")
+            print(f"{color.RED}No se Permiten letras elija una opcion correcta del 0 al 4{color.RESET}")
 
-
-# opcion 1
+# Funcion opcion 1 agregar productos
 def opcioniUno():
     global productos # ---> se declara variable global para usar fuera del la funcion
     if opcion == 1:
         
-        print("\nIngresar Producto: ")
+        print("\nIngresar el Producto: \n")
         # valida si es un string o no
+        while True:
+            try:
+                id = int(input("Ingresar id: "))
+                break
+            except ValueError:
+                print(f"{color.RED}Por Favor, ingresar un valor correcto {color.RESET}")
+
         while True:    
-                nombre = input("\nIngresar nombre: ")
+                nombre = input("Ingresar nombre: ")
                 if nombre.isalpha(): #----> metodo "isalpha" devuelve True si todos los caracteres son alfabéticos, False de lo contrario
                     break
                 else:
@@ -107,6 +114,7 @@ def opcioniUno():
             
         # crear un producto y añadirlo a la Lista en forma de diccionario
         producto = {
+            "id" : id,
             "nombre" : nombre,
             "cantidad" : cantidad,
             "precio" : precio
@@ -118,7 +126,33 @@ def opcioniUno():
 
         print(f"\n{color.GREEN}Producto {producto['nombre']} agregado correctamente.\n {color.RESET}")
 
-# opcion 4
+# Funcion opcion 2 modicar productos
+def opcioniDos():
+    global productos
+    if opcion == 2:
+        idProducto = int(input("\nIngresa el id del producto a modificar: "))
+
+        for  elemento in productos: # ---> recorre cada elemento de lista, cada elemento es un diccionario dentro de productos
+
+            if idProducto == elemento["id"]: # ---> da el acceso al id de los productos
+
+                while True: # ---> valida si el id es ingresado correctamente 
+                    try:
+                        # muestra el precio viejo y si se comple la condicion se modifica el precio 
+                        nuevoPrecio = float(input(f"\nPrecio Actual: {color.RED}{elemento['precio']}{color.RESET} ingresa el nuevo precio: ")) # --> se ingresa el precio
+
+                        elemento["precio"] = nuevoPrecio # --> se modifica el precio y se guarda en la variable nuevoPrecio
+                        print(f"\n{color.GREEN}Precio actualizado a: {nuevoPrecio}{color.RESET}") # --> se imprime en la pantalla la variable nueva con el precio
+                        break
+
+                    except ValueError:
+                        print(f"{color.RED}Por Favor, Ingresar un valor correcto {color.RESET}")
+                    
+
+                    # muestra este mensaje si el producto no se encontro
+                    print(f"{color.RED}El Producto no se encuentra, colocar la opcion 4 para ver los id de los productos{color.RESET}")
+   
+# Funcion opcion 4
 def opcioniCuatro():
     if opcion == 4:
         print("Listado\n")
@@ -128,6 +162,7 @@ def opcioniCuatro():
         # si encuentra algo trae el producto y ademas valida si tiene el stock bajo o no
     else:
             print(
+                f"{color.LIGHT_PURPLE}id{color.RESET}".ljust(30) +
                 f"{color.LIGHT_PURPLE}nombre{color.RESET}".ljust(30) +
                 f"{color.LIGHT_PURPLE}cantidad{color.RESET}".ljust(30) +
                 f"{color.LIGHT_PURPLE}precio{color.RESET}".ljust(25) +
@@ -137,4 +172,4 @@ def opcioniCuatro():
                 comentario = ""
                 if elemento["cantidad"] < 5: #-> revisa si tiene bajo el stock
                     comentario = "Stock Bajo" 
-                print(f"{elemento["nombre"].ljust(22)}{str(elemento["cantidad"]).ljust(17)}{str(elemento["precio"]).ljust(13)}{comentario}") #----> muestra la lista de productos
+                print(f"{str(elemento["id"]).ljust(19)}{elemento["nombre"].ljust(22)}{str(elemento["cantidad"]).ljust(17)}{str(elemento["precio"]).ljust(13)}{comentario}") #----> muestra la lista de productos
