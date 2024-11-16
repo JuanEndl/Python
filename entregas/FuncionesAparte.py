@@ -31,7 +31,7 @@ productos = [
 
 # funcion asteriscos que separan  el menu
 def asterisco():
-    print("*"*60)
+    print(f"{color.LIGHT_GREEN}{'*' * 60}{color.RESET}")
 
 # funcion Muestra el menu
 def menu():
