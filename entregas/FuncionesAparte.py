@@ -52,7 +52,7 @@ def opcioninicial():
         try:
             opcion = int(input(f"{color.LIGHT_BLUE}Por favor, selecciona una opción (0-4): {color.RESET} ")) # ingresa el numero
 
-            # si elije del 0 al 4 entra en algunas de opciones
+            # si elije del 0 al 4 entra en algunas de opciones disponibles
             if 0 <= opcion <= 4:
 
                 # si elije 0 cierra todo y sale del bucle
@@ -84,7 +84,7 @@ def opcioniUno():
         # valida si es un string o no
         while True:
             try:
-                id = int(input("Ingresar id: "))
+                id = int(input("Ingresar id: ")) # si es un id correcto sale, si no va al error
                 break
             except ValueError:
                 print(f"{color.RED}Por Favor, ingresar un valor correcto {color.RESET}")
@@ -112,7 +112,7 @@ def opcioniUno():
             except ValueError:
                 print(f"{color.RED}Por Favor, ingresar un valor correcto {color.RESET}")
             
-        # crear un producto y añadirlo a la Lista en forma de diccionario
+        # crear un producto y lo añade a la lista en forma de diccionario
         producto = {
             "id" : id,
             "nombre" : nombre,
@@ -128,20 +128,20 @@ def opcioniUno():
 
 # Funcion opcion 2 modicar productos
 def opcioniDos():
-    global productos
+    global productos # ---> se declara variable global para usar fuera del la funcion
     if opcion == 2:
-        while True:
+        while True: # ---> valida si el id es ingresado correctamente
             try:
-                idProducto = int(input("\nIngresa el id del producto a modificar: "))
+                idProducto = int(input("\nIngresa el id del producto a modificar: ")) # ---> guardo el dato ingresado en la variable idProductos
                 break
             except ValueError:
                 print(f"{color.RED}ingresa un nuemero{color.RESET}")
 
         idEncontrado = False # --->  Variable para verificar si se encontró el producto   "Bandera" (siempre se utiliza con un false)
 
-        for  elemento in productos: # ---> recorre cada elemento de lista, cada elemento es un diccionario dentro de productos
+        for  elemento in productos: # ---> recorre cada elemento de lista, cada elemento es un diccionario dentro de la variable Productos
 
-            if idProducto == elemento["id"]: # ---> da el acceso al id de los productos
+            if idProducto == elemento["id"]: # ---> consulto si la variable agregada por el usuario se encuentra en los elementos del diccionario y valida
 
                 # muestra el precio viejo y si se comple la condicion se modifica el precio 
                 nuevoPrecio = float(input(f"\nPrecio Actual: {color.RED}{elemento['precio']}{color.RESET} ingresa el nuevo precio: ")) # --> se ingresa el precio
@@ -156,10 +156,9 @@ def opcioniDos():
         
         # Si no se encontró el producto, muestra un mensaje
         if not idEncontrado:
-            print(f"{color.LIGHT_RED}ID no encontrado. Si no te acuerdas del ID, presiona 4 para ver la lista de productos.{color.RESET}")
+            print(f"{color.LIGHT_RED}ID no encontrado. Si no te acuerdas el ID, presiona 4 para ver la lista de productos.{color.RESET}")
 
-   
-# Funcion opcion 4
+# Funcion opcion 4 muestra el listado de los productos
 def opcioniCuatro():
     if opcion == 4:
         print("Listado\n")
