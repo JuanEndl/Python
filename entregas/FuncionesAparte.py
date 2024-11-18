@@ -32,6 +32,7 @@ productos = [
     },
 ]
 
+
 # Funcion asteriscos que separan  el menu
 def asterisco():
     print(f"{color.LIGHT_GREEN}{'*' * 60}{color.RESET}")
@@ -81,34 +82,45 @@ def opcioniUno():
     if opcion == 1:
         
         print("\nIngresar el Producto: \n")
-        # valida si es un string o no
+       
         while True:
+            # Ingresa el ID y lo valida 
             try:
                 id = int(input("Ingresar id: ")) # si es un id correcto sale, si no va al error
-                break
+                if id > 0: # Valida si el id es mayor a 0 o no, si es correcto entra en el break y sale
+                    break
+                else:
+                    print(f"{color.RED}Coloca un Id que sea mayor a 0{color.RESET}")
             except ValueError:
-                print(f"{color.RED}Por Favor, ingresar un valor correcto {color.RESET}")
+                print(f"{color.RED}Por Favor, ingresar un valor correcto{color.RESET}")
 
-        while True:    
+        while True:
                 nombre = input("Ingresar nombre: ")
+                 # valida si es un string o no
                 if nombre.isalpha(): #----> metodo "isalpha" devuelve True si todos los caracteres son alfabéticos, False de lo contrario
                     break
                 else:
                     print(f"{color.RED}Por Favor, Ingresar un nombre correcto {color.RESET}")
 
-        # Validad cantidad
+        # Ingresa Cantidad y la validad
         while True:
             try:
                 cantidad = int(input("Ingresar cantidad: "))
-                break
+                if cantidad > 0: # Valida si el id es mayor a 0 o no, si es correcto entra en el break y sale
+                    break
+                else:
+                    print(f"{color.RED}Ingrese un número mayor a 0.{color.RESET}")
             except ValueError:
-                print(f"{color.RED}Por Favor, Ingresar un valor correcto {color.RESET}")
+                print(f"{color.RED}Por Favor, Ingresar un valor correcto{color.RESET}")
             
-        # Validad precio
+       # Ingresa Precio y la validad
         while True:
             try:
                 precio = float(input("Ingresar precio: "))
-                break
+                if precio > 0: # Valida si el id es mayor a 0 o no, si es correcto entra en el break y sale
+                    break
+                else:
+                    print(f"{color.RED}Por Favor, Ingresar un valor correcto{color.RESET}")
             except ValueError:
                 print(f"{color.RED}Por Favor, ingresar un valor correcto {color.RESET}")
             
@@ -126,7 +138,7 @@ def opcioniUno():
 
         print(f"\n{color.GREEN}Producto {producto['nombre']} agregado correctamente.\n {color.RESET}")
 
-# Funcion opcion 2 modicar productos
+# Funcion opcion 2 modicar Productos
 def opcioniDos():
     global productos # ---> se declara variable global para usar fuera del la funcion
     if opcion == 2:
@@ -158,10 +170,39 @@ def opcioniDos():
         if not idEncontrado:
             print(f"{color.LIGHT_RED}ID no encontrado. Si no te acuerdas el ID, presiona 4 para ver la lista de productos.{color.RESET}")
 
-# Funcion opcion 4 muestra el listado de los productos
+# Funcion opcion 2 eliminar Productos
+def opcionTres():
+    global productos # ---> se declara variable global para usar fuera del la funcion
+    if opcion == 3:
+        while True: # ---> valida si el id es ingresado correctamente
+            try:
+                idProducto = int(input("\nIngresa el id del producto a Borrar: ")) # ---> guardo el dato ingresado en la variable idProductos
+                break
+            except ValueError:
+                print(f"{color.RED}ingresa un nuemero{color.RESET}")
+
+        idEncontrado = False # --->  Variable para verificar si se encontró el producto   "Bandera" (siempre se utiliza con un false)
+
+        for  elemento in productos: # ---> recorre cada elemento de lista, cada elemento es un diccionario dentro de la variable Productos
+
+            if idProducto == elemento["id"]: # ---> consulto si la variable agregada por el usuario se encuentra en los elementos del diccionario y valida
+                
+                productos.remove(elemento) # ---> elimina el producto completo de la Lista
+
+                print(f"\n{color.GREEN}Se borro el producto con el id: {idProducto}{color.RESET}") # --> se imprime en la pantalla la variable nueva con el precio
+
+                # Si el producto fue encontrado sale 
+                idEncontrado = True  # "Bandera" 
+                break
+        
+        # Si no se encontró el producto, muestra un mensaje
+        if not idEncontrado:
+            print(f"{color.LIGHT_RED}ID no encontrado. Si no te acuerdas el ID, presiona 4 para ver la lista de productos.{color.RESET}")
+
+# Funcion opcion 4 muestra el listado de los Productos
 def opcioniCuatro():
     if opcion == 4:
-        print("Listado\n")
+        print(f"{color.LIGHT_WHITE}\nListado de Productos\n{color.RESET}")
     if len(productos) == 0:
             print("no hay nada")
 
@@ -178,4 +219,8 @@ def opcioniCuatro():
                 comentario = ""
                 if elemento["cantidad"] < 5: #-> revisa si tiene bajo el stock
                     comentario = "Stock Bajo" 
-                print(f"{str(elemento["id"]).ljust(19)}{elemento["nombre"].ljust(22)}{str(elemento["cantidad"]).ljust(17)}{str(elemento["precio"]).ljust(13)}{comentario}") #----> muestra la lista de productos
+                print(f"{str(elemento["id"]).ljust(19)}"
+                      f"{elemento["nombre"].ljust(22)}"
+                      f"{str(elemento["cantidad"]).ljust(17)}"
+                      f"{str(elemento["precio"]).ljust(13)}{comentario}") #----> muestra la lista de productos
+

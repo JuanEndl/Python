@@ -3,7 +3,6 @@
 
 # importaciones de archivos
 import FuncionesAparte # traer el funciones al proyecto
-import color # importa el color al proyecto
 
 while True:
     # Muestra el menu de opciones
@@ -35,7 +34,7 @@ while True:
     
     # todavia nada
     elif opcion == 3:
-        print(f"\n{color.RED}Todavia no hace nada{color.RESET}") # Eliminar  Productos
+        FuncionesAparte.opcionTres()
 
     # muestra el listado y valida si hay algo o no
     elif opcion == 4:
