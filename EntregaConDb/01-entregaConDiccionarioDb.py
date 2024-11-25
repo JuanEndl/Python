@@ -1,6 +1,3 @@
-
-
-
 # importaciones de archivos
 import FuncionesAparte # traer el funciones al proyecto
 

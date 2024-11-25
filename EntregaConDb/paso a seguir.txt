@@ -1,0 +1,10 @@
+1) importar el sqlite
+    a) import sqlite3 as sql
+
+2) crear la db
+    a) crear la conexcion como una funcion
+
+    def createDB():
+        conn = sql.connet("productros.db")
+        conn.commit()
+        conn.close()
