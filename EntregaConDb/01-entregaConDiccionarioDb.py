@@ -36,5 +36,9 @@ while True:
     # muestra el listado y valida si hay algo o no
     elif opcion == 4:
         FuncionesAparte.opcioncuatro()
-        
+    
+    # Mostrar todo los productos bajos en stock
+    elif opcion == 5:
+        FuncionesAparte.opcioncinco()
+
 # termina el programa
