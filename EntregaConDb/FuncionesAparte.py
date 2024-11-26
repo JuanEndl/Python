@@ -4,7 +4,7 @@ import color
 # productos = [] # --> se comento para usar los "productos" pre definidos por mio descomentar para agregar todos los productos desde 0
 
 # productos pre definidos por mi, "comentados"
-productos = [
+'''productos = [
     {
         "id": 1,
         "nombre":"uva",
@@ -30,7 +30,7 @@ productos = [
         "precio":3
     },
 ]
-
+'''
 
 
 
