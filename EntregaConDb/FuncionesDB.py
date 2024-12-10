@@ -1,6 +1,7 @@
 import sqlite3 as sql
 import os # importa la DB. Para trabajar con rutas
 
+# para abrir la base de sebe apretar shift + ctrl + P. Colocar SQLite 3 y apretar en la opcion "Open DataBase" y eleguir nuestra DB
 
 '''Funcion que crea la DB y la ruta donde se va a encontrar'''
 def createDB():
