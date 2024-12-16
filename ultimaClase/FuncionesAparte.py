@@ -87,8 +87,8 @@ def opcioninicial():
         except ValueError:
             print(f"{color.RED}No se Permiten letras elija una opcion correcta del 0 al 5{color.RESET}")
 
-''''''
-# Funcion opcion 1 agregar productos''''''
+'''DB'''
+# Funcion opcion 1 agregar productos
 def opcioniUno():
     global productos # ---> se declara variable global para usar fuera del la funcion
     if opcion == 1:
@@ -193,7 +193,7 @@ def opcionTres():
         if not idEncontrado:
             print(f"{color.LIGHT_RED}ID no encontrado. Si no te acuerdas el ID, presiona 4 para ver la lista de productos.{color.RESET}")
 
-''''''
+'''DB'''
 # Funcion opcion 4 muestra el listado de los Productos
 def opcioncuatro():
     global productos  # Accede a la lista global de productos
