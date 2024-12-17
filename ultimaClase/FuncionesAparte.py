@@ -1,46 +1,13 @@
 # importar el color a la Funciones
 import color
-import sqlite3 as sql
 import funcionesDB
 
 ############################ conexion de la base de datos
 
-#funcionesDB.createDB()
+funcionesDB.createDB()
 
 #funcionesDB.createTable()
 ########################################################
-
-#productos = [] # --> se comento para usar los "productos" pre definidos por mio descomentar para agregar todos los productos desde 0
-
-# productos pre definidos por mi, "comentados"
-'''productos = [
-    {
-        "id": 1,
-        "nombre":"uva",
-        "cantidad":12,
-        "precio":12.4
-    },
-    {
-        "id": 2,
-        "nombre":"papa",
-        "cantidad":24,
-        "precio":16.6
-    },
-    {
-        "id": 3,
-        "nombre":"batata",
-        "cantidad":5,
-        "precio":17
-    },
-    {
-        "id": 4,
-        "nombre":"sandia",
-        "cantidad":2,
-        "precio":3
-    },
-]'''
-
-
 
 
 # Funcion asteriscos que separan  el menu
@@ -132,66 +99,71 @@ def opcioniUno():
         except Exception as e:
             print(f"{color.RED}Error al agregar el producto a la base de datos: {e}{color.RESET}")
 
+'''DB'''
 # Funcion opcion 2 modicar Productos
 def opcioniDos():
-    global productos # ---> se declara variable global para usar fuera del la funcion
+    global productos  # ---> se declara variable global para usar fuera de la función
     if opcion == 2:
-        while True: # ---> valida si el id es ingresado correctamente
+        # Solicita el ID del producto a modificar
+        while True:
             try:
-                idProducto = int(input("\nIngresa el id del producto a modificar: ")) # ---> guardo el dato ingresado en la variable idProductos
-                break
+                id = int(input("\nIngresa el ID del producto a modificar: "))
+
+                # Verifica si el ID existe
+                datos_db = funcionesDB.readRows()
+                producto_existente = any(row[0] == id for row in datos_db)
+
+                if not producto_existente:
+                    print(f"{color.RED}No se encontró un producto con el ID {id}. Intenta de nuevo.{color.RESET}")
+                else:
+                    print(f"{color.GREEN}Producto con ID {id} encontrado.{color.RESET}")
+                    break  # Sale del bucle si encuentra el ID válido
             except ValueError:
-                print(f"{color.RED}ingresa un nuemero{color.RESET}")
+                print(f"{color.RED}Por favor, ingresa un número válido para el ID.{color.RESET}")
 
-        idEncontrado = False # --->  Variable para verificar si se encontró el producto   "Bandera" (siempre se utiliza con un false)
+        # Solicita la nueva cantidad del producto
+        while True:
+            try:
+                cantidad = int(input("Ingresa la nueva cantidad: "))
+                if cantidad >= 0:  # Valida que la cantidad sea positiva
+                    break
+                else:
+                    print(f"{color.RED}La cantidad no puede ser negativa.{color.RESET}")
+            except ValueError:
+                print(f"{color.RED}Por favor, ingresa un número válido para la cantidad.{color.RESET}")
 
-        for  elemento in productos: # ---> recorre cada elemento de lista, cada elemento es un diccionario dentro de la variable Productos
+        # Llama a la función que actualiza la base de datos
+        funcionesDB.updateRow(cantidad, id)
 
-            if idProducto == elemento["id"]: # ---> consulto si la variable agregada por el usuario se encuentra en los elementos del diccionario y valida
+        # Actualiza la lista de productos en memoria después de la modificación
+        datos_db = funcionesDB.readRows()
+        productos = [
+            {"id": row[0], "nombre": row[1], "cantidad": row[2], "precio": row[3]}
+            for row in datos_db
+        ]
+        print(f"{color.GREEN}Producto con ID {id} modificado correctamente.{color.RESET}")
 
-                # muestra el precio viejo y si se comple la condicion se modifica el precio 
-                nuevoPrecio = float(input(f"\nPrecio Actual: {color.RED}{elemento['precio']}{color.RESET} ingresa el nuevo precio: ")) # --> se ingresa el precio
-
-                elemento["precio"] = nuevoPrecio # --> se modifica el precio y se guarda en la variable nuevoPrecio
-
-                print(f"\n{color.GREEN}Precio actualizado a: {nuevoPrecio}{color.RESET}") # --> se imprime en la pantalla la variable nueva con el precio
-
-                # Si el producto fue encontrado sale 
-                idEncontrado = True  # "Bandera" 
-                break
-        
-        # Si no se encontró el producto, muestra un mensaje
-        if not idEncontrado:
-            print(f"{color.LIGHT_RED}ID no encontrado. Si no te acuerdas el ID, presiona 4 para ver la lista de productos.{color.RESET}")
-
-# Funcion opcion 2 eliminar Productos
+'''DB'''
+# Funcion opcion 3 eliminar Productos
 def opcionTres():
     global productos # ---> se declara variable global para usar fuera del la funcion
     if opcion == 3:
         while True: # ---> valida si el id es ingresado correctamente
             try:
-                idProducto = int(input("\nIngresa el id del producto a Borrar: ")) # ---> guardo el dato ingresado en la variable idProductos
+                id = int(input("\nIngresa el id del producto a Borrar: ")) # ---> guardo el dato ingresado en la variable idProductos
                 break
             except ValueError:
                 print(f"{color.RED}ingresa un nuemero{color.RESET}")
 
-        idEncontrado = False # --->  Variable para verificar si se encontró el producto   "Bandera" (siempre se utiliza con un false)
 
-        for  elemento in productos: # ---> recorre cada elemento de lista, cada elemento es un diccionario dentro de la variable Productos
+        funcionesDB.deleteRow(id)
 
-            if idProducto == elemento["id"]: # ---> consulto si la variable agregada por el usuario se encuentra en los elementos del diccionario y valida
-                
-                productos.remove(elemento) # ---> elimina el producto completo de la Lista
-
-                print(f"\n{color.GREEN}Se borro el producto con el id: {idProducto}{color.RESET}") # --> se imprime en la pantalla la variable nueva con el precio
-
-                # Si el producto fue encontrado sale 
-                idEncontrado = True  # "Bandera" 
-                break
-        
-        # Si no se encontró el producto, muestra un mensaje
-        if not idEncontrado:
-            print(f"{color.LIGHT_RED}ID no encontrado. Si no te acuerdas el ID, presiona 4 para ver la lista de productos.{color.RESET}")
+        # Actualiza la lista de productos después de la eliminación
+        datos_db = funcionesDB.readRows()
+        productos = [
+            {"id": row[0], "nombre": row[1], "cantidad": row[2], "precio": row[3]}
+            for row in datos_db
+        ]
 
 '''DB'''
 # Funcion opcion 4 muestra el listado de los Productos
@@ -224,17 +196,25 @@ def opcioncuatro():
             if elemento["cantidad"] < 5:  # Revisa si tiene bajo stock
                 comentario = "Stock Bajo"
             print(
-                f"{str(elemento['id']).ljust(21)}"
-                f"{elemento['nombre'].ljust(20)}"
+                f"{str(elemento['id']).ljust(19)}"
+                f"{elemento['nombre'].ljust(21)}"
                 f"{str(elemento['cantidad']).ljust(17)}"
-                f"{str(elemento['precio']).ljust(13)}{comentario}"
+                f"{str(elemento['precio']).ljust(14)}{comentario}"
             )
 
 # Funcion opcion 5 muestra el listado de los Productos que tienen bajo stock
 def opcioncinco():
     if opcion == 5:
+        global productos  # Accede a la lista global de productos
+
         print (f"{color.LIGHT_WHITE}\nListado de Productos\n{color.RESET}")
     
+        datos_db = funcionesDB.readRowslow()
+
+        productos = [ # recorre cada fila de la DB (datos_db) 
+        {"id": row[0], "nombre": row[1], "cantidad": row[2], "precio": row[3]}
+        for row in datos_db 
+    ]
         if len(productos) == 0:
             print("No hay productos en la lista.")
             return
@@ -254,8 +234,8 @@ def opcioncinco():
                 hay_bajo_stock = True
                 comentario = "Stock bajo"
                 print(
-                    f"{str(elemento['id']).ljust(11)}"
-                    f"{elemento['nombre'].ljust(19)}"
+                    f"{str(elemento['id']).ljust(19)}"
+                    f"{elemento['nombre'].ljust(22)}"
                     f"{str(elemento['cantidad']).ljust(17)}"
                     f"{str(elemento['precio']).ljust(13)}{comentario}"
                 )
