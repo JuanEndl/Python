@@ -27,7 +27,7 @@ while True:
     
     # Modificacion del producto
     elif opcion == 2:
-        FuncionesAparte.opcioniDos()
+        FuncionesAparte.opcionDos()
     
     # Elimina un producto entero de la Lista (diccionario)
     elif opcion == 3:
