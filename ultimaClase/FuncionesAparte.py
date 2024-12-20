@@ -222,7 +222,7 @@ def opcioncinco():
     if opcion == 5:
         global productos  # Accede a la lista global de productos
 
-        print (f"{color.LIGHT_WHITE}\nListado de Productos\n{color.RESET}")
+        print (f"{color.LIGHT_WHITE}\nListado de Productos Bajo Stock\n{color.RESET}")
     
         datos_db = funcionesDB.readRowslow()
 
