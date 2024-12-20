@@ -43,7 +43,7 @@ def createDB():
             )
         """)
         conn.commit()
-        print(f"{color.GREEN}Tabla 'productos' verificada.{color.RESET}")
+        print(f"{color.GREEN}Tabla 'productos' creada.{color.RESET}")
     except Exception as i:
         print(f"{color.RED}Error al crear la tabla: {i}{color.RESET}")
     finally:
